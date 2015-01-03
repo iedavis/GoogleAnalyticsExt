@@ -1,0 +1,29 @@
+{
+    "widgetDescriptorName": "GoogleAnalytics",
+    "properties": [
+        {
+            "id": "liveGoogleTrackingId",
+            "type": "stringType",
+            "name": "liveGoogleTrackingId",
+            "helpTextResourceId": "liveGoogleHelpText",
+            "labelResourceId": "liveGoogleLabel",
+            "defaultValue": ""
+        },
+        {
+            "id": "testGoogleTrackingId",
+            "type": "stringType",
+            "name": "testGoogleTrackingId",
+            "helpTextResourceId": "testGoogleHelpText",
+            "labelResourceId": "testGoogleLabel",
+            "defaultValue": ""
+        },
+        {
+            "id": "googleVerificationCode",
+            "type": "stringType",
+            "name": "googleVerificationCode",
+            "helpTextResourceId": "googVfHelpText",
+            "labelResourceId": "googVfLabel",
+            "defaultValue": ""
+        }
+    ]
+}

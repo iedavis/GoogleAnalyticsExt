@@ -1,0 +1,10 @@
+{
+  "resources" : {
+    "liveGoogleHelpText": "Live Google Analytics ID",
+    "liveGoogleLabel": "Live ID",
+    "testGoogleHelpText": "Test Google Analytics ID",
+    "testGoogleLabel": "Test ID",
+    "googVfHelpText": "Google Verification Code",
+    "googVfLabel": "Code"
+  }
+}

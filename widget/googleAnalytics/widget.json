@@ -1,0 +1,13 @@
+{
+  "name": "Google Universal Analytics",
+  "javascript": "googleAnalytics",
+  "imports": ["cart","product"],
+  "global": true,
+  "globalEnabled": true,
+  "jsEditable": false,
+  "config": {
+  	"testGoogleTrackingId":"UA-38996980-1",
+    "liveGoogleTrackingId":"UA-38996980-1",
+  	"googleVerificationCode":""
+  }
+}
