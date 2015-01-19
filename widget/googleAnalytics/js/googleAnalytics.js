@@ -59,16 +59,6 @@ define(
           $.Topic(pubsub.topicNames.ORDER_SUBMISSION_SUCCESS).subscribe(this.orderSuccessful);
           $.Topic(pubsub.topicNames.ORDER_CREATE).subscribe(this.orderCreated);
 
-
-//   Not using Recs yet
-//          $.Topic("RECOMMENDATIONS_CHANGED").subscribe(this.recommendationsOffered);
-
-
-//   These two things aren't quite working yet. Event firing seems a bit odd
-//   SKU_SELECTED event seems to be firing too many times
-//          $.Topic(pubsub.topicNames.PRODUCT_VIEWED).subscribe(this.productViewed);
-//          $.Topic(pubsub.topicNames.SKU_SELECTED).subscribe(this.productViewed);
-
         } else {
           ccLogger.error("Google Analytics JavaScript did not load/initialize");
         }
@@ -186,61 +176,8 @@ define(
           'coupon': ''
         });
 
-//      See if this Order contains any 'recommended' products seen in this Session
-//      Generate some Google Events to track conversions vs. recommendations
-/**
-        if(widget.recsOfferedThisSession){
-          var recsConversionStatus = 'Order has no Recommended Products';
-          var recsCounter = 0;
-          for (p = 0; p < widget.orderSnapshot.items().length; p++){
-            var recommendedThisSession = false;
-            for (var i = 0; i < widget.recsOfferedThisSession.length; i++){
-              if(widget.orderSnapshot.items[p].id.toUpperCase() === widget.recsOfferedThisSession[i]){
-                recommendedThisSession = true;
-                recsConversionStatus = 'Order has Recommended Products';
-                recsCounter++;
-              }
-            }
-            if(recommendedThisSession === true){
-              window.ga('send', {
-                'hitType': 'event',
-                'eventCategory': 'Recommended Product Purchase',
-                'eventAction': 'Product Purchase',
-                'eventLabel': widget.orderSnapshot.items[p].name + ' (' + widget.orderSnapshot.items[p].id + ')'
-              });
-            }
-          }
-          window.ga('send', {
-            'hitType': 'event',
-            'eventCategory': 'Recommendations Conversion Impact',
-            'eventAction': 'Order Submit',
-            'eventLabel' : recsConversionStatus,
-            'eventValue' : recsCounter
-          });
-        }
-*/
 
         widget.orderSnapshot = {};
-      },
-
-// NOT CURRENTLY TRIGGERED
-      recommendationsOffered: function(recsOffered){
-//      Maintain an array of Product ID's of products that have been recommended during this session
-//      We can then check this array when an Order is placed to see if the Order contains recommended products
-        if(widget.recsOfferedThisSession === undefined){widget.recsOfferedThisSession = [];}
-        var startingArrayLength = widget.recsOfferedThisSession.length;
-        for (var p = 0; p < recsOffered.length; p++){
-          var wasAlreadyRecommended = false;
-          for (var i = 0; i < startingArrayLength; i++){
-            if(widget.recsOfferedThisSession[i] === recsOffered[p].id){
-              wasAlreadyRecommended = true;
-              break;
-            }
-          }
-          if(wasAlreadyRecommended === false){
-            widget.recsOfferedThisSession.push(recsOffered[p].id);
-          }
-        }
       },
 
       profileRegistration: function(data){
@@ -271,48 +208,8 @@ define(
           'eventAction': 'Password Reset',
           'eventLabel': ''
         });
-      },
-
-
-// NOT CURRENTLY TRIGGERED
-      productViewed: function(product, sku, variantOptions){
-        var productName = product.displayName + ' (' + product.id + ')';
-        var skuName = "";
-        var skuOptions = "";
-        var categoryName = "";
-        if(sku){
-          if(variantOptions){
-            for (var o = 0; o < variantOptions.length; o++) {
-              if(o > 0) skuOptions = skuOptions + ":";
-              skuOptions = skuOptions + variantOptions[o].selectedOptionValue().key;
-            }
-            skuName = product.displayName + ' - ' + skuOptions + ' (' + sku.repositoryId + ')';
-          } else {
-            skuName = product.displayName + ' (' + sku.repositoryId + ')';
-          }
-
-        } else {
-          if(product.childSKUs.length === 1){
-            skuName = product.displayName + ' (' + product.childSKUs[0].repositoryId + ')';
-          } else {
-            skuName = product.displayName + ' (??)';
-          }
-        }
-
-        categoryName = product.parentCategories[0].displayName;
-        if(product.parentCategories[0].fixedParentCategories[0].displayName !== undefined){
-          categoryName = product.parentCategories[0].fixedParentCategories[0].displayName + ' / ' + categoryName;
-        }
-
-        window.ga('ec:addProduct', {
-          'id': skuName,
-          'name': productName,
-          'category': categoryName,
-          'brand': '',
-          'variant': ''
-        });
-        window.ga('ec:setAction', 'detail');
       }
+
     };
   }
 );
