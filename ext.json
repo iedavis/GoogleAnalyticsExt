@@ -3,7 +3,7 @@
   "developerID": "999999",
   "createdBy": "Oracle Corp",
   "name": "Google Universal Analytics",
-  "version" :1,
-  "timeCreated": "2014-01-01",
+  "version" :2,
+  "timeCreated": "2015-01-01",
   "description": "Google Universal Analytics Widget"
 }
